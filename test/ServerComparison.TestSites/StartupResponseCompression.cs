@@ -36,6 +36,13 @@ namespace ServerComparison.TestSites
                 subApp.UseResponseCompression();
                 subApp.Run(context =>
                 {
+                    // https://github.com/aspnet/BasicMiddleware/issues/247
+                    var bodyFeature = context.Features.Get<IHttpBodyControlFeature>();
+                    if (bodyFeature != null)
+                    {
+                        bodyFeature.AllowSynchronousIO = true;
+                    }
+
                     context.Response.ContentType = "text/plain";
                     context.Response.ContentLength = helloWorldBody.Length;
                     return context.Response.WriteAsync(helloWorldBody);
