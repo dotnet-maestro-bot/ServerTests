@@ -26,5 +26,5 @@ phases:
   parameters:
     agentOs: Linux
     beforeBuild:
-    - script: apt-get install pcre-devel
+    - script: apt-get install libpcre3 libpcre3-dev
     - script: ./install-nginx.sh
