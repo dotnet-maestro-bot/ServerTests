@@ -20,11 +20,11 @@ phases:
   parameters:
     agentOs: macOS
     beforeBuild:
-    - script: ./install-nginx.sh
+    - script: brew install nginx
 
 - template: .vsts-pipelines/templates/phases/default-build.yml@buildtools
   parameters:
     agentOs: Linux
     beforeBuild:
     - script: apt-get install libpcre3 libpcre3-dev
-    - script: ./install-nginx.sh
+    - script: apt-get install nginx
