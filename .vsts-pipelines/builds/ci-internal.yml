@@ -10,4 +10,19 @@ resources:
     ref: refs/heads/dev
 
 phases:
-- template: .vsts-pipelines/templates/project-ci.yml@buildtools
+- template: .vsts-pipelines/templates/phases/default-build.yml@buildtools
+  parameters:
+    agentOs: Windows
+
+- template: .vsts-pipelines/templates/phases/default-build.yml@buildtools
+  parameters:
+    agentOs: macOS
+    beforeBuild:
+    - script: brew install nginx
+
+- template: .vsts-pipelines/templates/phases/default-build.yml@buildtools
+  parameters:
+    agentOs: Linux
+    beforeBuild:
+    - script: apt-get update
+    - script: apt-get install libpcre3 libpcre3-dev nginx
