@@ -15,6 +15,10 @@ phases:
 - template: .vsts-pipelines/templates/phases/default-build.yml@buildtools
   parameters:
     agentOs: Windows
+    beforeBuild:
+      - script: .\tools\update_schema.ps1
+      - script: net start w3svc
+
 
 - template: .vsts-pipelines/templates/phases/default-build.yml@buildtools
   parameters:
